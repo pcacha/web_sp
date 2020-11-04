@@ -20,7 +20,28 @@ class DatabaseModel {
     }
 
     public function getAllArticles() : array {
+        $query = "select * from cacha_articles";
+        return $this->queryAll($query);
+    }
 
+    private function queryOne($query, $params = array())
+    {
+        $statement = $this->pdo->prepare($query);
+        $statement->execute($params);
+        return $statement->fetch();
+    }
+
+    private function queryAll($query, $params = array())
+    {
+        $statement = $this->pdo->prepare($query);
+        $statement->execute($params);
+        return $statement->fetchAll();
+    }
+
+    private function queryColumn($query, $params = array())
+    {
+        $res = $this->queryOne($query, $params);
+        return $res[0];
     }
 }
 ?>

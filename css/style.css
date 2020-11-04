@@ -1,0 +1,55 @@
+body {
+    background-color: black;
+
+}
+
+footer{
+    background-color: #023d75;
+    bottom: 0;
+    height: 45px;
+    color: white;
+    font-size: 1.15em;
+
+}
+
+#nav{
+    background-color: #023d75!important;
+
+}
+#nav a, ul li a{
+    color: white;
+}
+
+.intro{
+    background: slategray url("../images/background.png") no-repeat fixed;
+    height: 550px;
+}
+
+.navbar-brand{
+    font-size: 1.7em!important;
+    font-weight: bolder;
+}
+
+
+.intro p{
+    font-size: 1.45em;
+}
+
+.blurred-black{
+    background: rgba(200, 200, 200, 0.85);
+
+}
+
+h3{
+    color: #023d75;
+    font-weight: bolder!important;
+}
+
+.my-card{
+    padding: 40px;
+    background-color: cadetblue;
+}
+
+.bottom-margin{
+    margin-bottom: 90px;
+}
