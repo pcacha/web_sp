@@ -13,7 +13,7 @@ class RegistrationController implements IController {
 
     public function __construct(){
         $this->db = DatabaseModel::getDatabaseModel();
-        $this->session = new SessionManager();
+        $this->session = SessionManager::getSession();
     }
 
 
@@ -49,13 +49,15 @@ class RegistrationController implements IController {
                     return $tplData;
                 }
 
-                $done = $this->db->registrateUser($name, $pass1);
-                if($done){
+                $addedInUsers = $this->db->registrateUser($name, $pass1);
+                $addedRole = $this->db->addAuthorRole($name);
+                if($addedInUsers && $addedRole){
                     $tplData["message"] = "Uživatel byl úspěšně zaregistrován";
                     $tplData["res"] = true;
 
 
                     $handler->loginUser($this->session, $this->db->getUserByName($name));
+                    header("Location: index.php?page=uvod");
                 }
                 else{
                     $tplData["message"] = "Něco se nepovedlo";

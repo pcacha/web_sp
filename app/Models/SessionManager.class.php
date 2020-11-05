@@ -3,11 +3,18 @@
 namespace kivweb\Models;
 
 class SessionManager {
+    private static $session;
 
-    public function __construct(){
+    private function __construct(){
         session_start();
     }
-    
+
+    public static function getSession(){
+        if(empty(self::$session)) {
+            self::$session = new SessionManager();
+        }
+        return self::$session;
+    }
 
     public function addSession(string $key, $value){
         $_SESSION[$key] = $value;
@@ -44,6 +51,22 @@ class SessionManager {
             $tmpData["roles"] = $_SESSION["roles"];
         }
         return $tmpData;
+    }
+
+    public function hasAccess($access):bool
+    {
+        if(!isset($_SESSION["roles"])){
+            return false;
+        }
+
+        foreach ($access as $a){
+            foreach ($_SESSION["roles"] as $role){
+                if($a === $role){
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }
 ?>

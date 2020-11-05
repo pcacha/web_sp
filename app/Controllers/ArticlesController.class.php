@@ -11,7 +11,7 @@ class ArticlesController implements IController {
 
     public function __construct() {
         $this->db = db::getDatabaseModel();
-        $this->session = new SessionManager();
+        $this->session = SessionManager::getSession();
     }
 
     public function show(string $pageTitle):array {

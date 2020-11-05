@@ -14,7 +14,7 @@ class LoginController implements IController {
     public function __construct()
     {
         $this->db = DatabaseModel::getDatabaseModel();
-        $this->session = new SessionManager();
+        $this->session = SessionManager::getSession();
     }
 
 

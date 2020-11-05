@@ -1,11 +1,10 @@
 <?php
-
 namespace kivweb\Controllers;
 
 use kivweb\Models\SessionManager;
 
-class IntroductionController implements IController {
-
+class CreateArticelController implements IController
+{
     private $session;
 
     public function __construct()
@@ -20,6 +19,4 @@ class IntroductionController implements IController {
 
         return $tplData;
     }
-    
 }
-?>

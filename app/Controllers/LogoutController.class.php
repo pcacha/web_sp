@@ -11,7 +11,7 @@ class LogoutController implements IController {
 
     public function __construct()
     {
-        $this->session = new SessionManager();
+        $this->session = SessionManager::getSession();
     }
 
 

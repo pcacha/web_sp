@@ -35,6 +35,12 @@ class DatabaseModel {
         return $this->query($query, $params);
     }
 
+    public function addAuthorRole($name){
+        $query = "insert into cacha_user_role (user_id, role_id) values ((select id from cacha_users where name = ?), 1)";
+        $params = [$name];
+        return $this->query($query, $params);
+    }
+
     public function getUserRolesTitles($id){
         $query = "select r.title from cacha_users as s 
                        join cacha_user_role as ur on s.id = ur.user_id
