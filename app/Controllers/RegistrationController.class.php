@@ -20,6 +20,7 @@ class RegistrationController implements IController {
     public function show(string $pageTitle):array {
         $tplData = [];
         $tplData['title'] = $pageTitle;
+        $tplData = $this->session->addCredentialsToTmpData($tplData);
 
         $validator = new AccountValidator();
         $handler = new AccountHandler();
@@ -64,7 +65,6 @@ class RegistrationController implements IController {
                 $tplData["message"] = "Vyplň všechna pole, až poté odešli formulář";
             }
         }
-
 
         return $tplData;
     }

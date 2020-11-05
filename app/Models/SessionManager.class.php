@@ -36,5 +36,14 @@ class SessionManager {
     public function destroy(){
         session_destroy();
     }
+
+    public function addCredentialsToTmpData($tmpData){
+        if(isset($_SESSION["name"])){
+            $tmpData["name"] = $_SESSION["name"];
+            $tmpData["id"] = $_SESSION["id"];
+            $tmpData["roles"] = $_SESSION["roles"];
+        }
+        return $tmpData;
+    }
 }
 ?>

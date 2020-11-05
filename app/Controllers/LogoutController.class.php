@@ -4,7 +4,7 @@ namespace kivweb\Controllers;
 
 use kivweb\Models\SessionManager;
 
-class IntroductionController implements IController {
+class LogoutController implements IController {
 
     private $session;
 
@@ -18,10 +18,10 @@ class IntroductionController implements IController {
     public function show(string $pageTitle):array {
         $tplData = [];
         $tplData['title'] = $pageTitle;
-        $tplData = $this->session->addCredentialsToTmpData($tplData);
+        $this->session->destroy();
 
         return $tplData;
     }
-    
+
 }
 ?>

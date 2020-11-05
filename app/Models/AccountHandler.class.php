@@ -30,4 +30,22 @@ class AccountHandler{
             return $finalArray;
         }
     }
+
+    public function checkCredentials($name, $pass)
+    {
+        $user = $this->db->getUserByName($name);
+
+        if($user === false)
+        {
+            return null;
+        }
+
+
+        if(password_verify($pass, $user["password"])){
+            return $user;
+        }
+        else{
+            return null;
+        }
+    }
 }

@@ -10,6 +10,10 @@ header{
     top: 0;
 }
 
+#nav div div ul li div.my-dropdown > a{
+    color: black;
+}
+
 footer{
     background-color: #023d75;
     bottom: 0;

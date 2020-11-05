@@ -36,7 +36,7 @@ class DatabaseModel {
     }
 
     public function getUserRolesTitles($id){
-        $query = "select a.title from cacha_users as s 
+        $query = "select r.title from cacha_users as s 
                        join cacha_user_role as ur on s.id = ur.user_id
                        join cacha_roles as r on r.id = ur.role_id
                        where s.id = ?";
