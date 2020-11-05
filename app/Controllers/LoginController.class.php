@@ -2,7 +2,7 @@
 
 namespace kivweb\Controllers;
 
-class IntroductionController implements IController {
+class LoginController implements IController {
 
 
     public function show(string $pageTitle):array {
@@ -11,6 +11,6 @@ class IntroductionController implements IController {
 
         return $tplData;
     }
-    
+
 }
 ?>

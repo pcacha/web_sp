@@ -24,6 +24,38 @@ class DatabaseModel {
         return $this->queryAll($query);
     }
 
+    public function getUserName($name){
+        $query = "select name from cacha_users where name = ?";
+        return $this->queryOne($query, [$name]);
+    }
+
+    public function registrateUser($name, $pass){
+        $query = "insert into cacha_users (name, password, reg_date) values (?, ?, ?)";
+        $params = [$name, password_hash($pass, PASSWORD_DEFAULT), date("Y-m-d")];
+        return $this->query($query, $params);
+    }
+
+    public function getUserRolesTitles($id){
+        $query = "select a.title from cacha_users as s 
+                       join cacha_user_role as ur on s.id = ur.user_id
+                       join cacha_roles as r on r.id = ur.role_id
+                       where s.id = ?";
+        $params = [$id];
+        return $this->queryAll($query, $params);
+    }
+
+    public function getUserByName($name)
+    {
+        $query = "select * from cacha_users where name = ?";
+        $params = [$name];
+        return $this->queryOne($query, $params);
+    }
+
+    private function query($query, $params = array()){
+        $statement = $this->pdo->prepare($query);
+        return $statement->execute($params);
+    }
+
     private function queryOne($query, $params = array())
     {
         $statement = $this->pdo->prepare($query);

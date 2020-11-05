@@ -16,5 +16,24 @@ const WEB_PAGES = array(
         "template_type" => \kivweb\Views\TemplateBasics::PAGE_INTRODUCTION,
     ),
 
+    "prihlaseni" => array(
+        "title" => "Přihlášení",
+        "controller_class_name" => \kivweb\Controllers\LoginController::class,
+        "view_class_name" => \kivweb\Views\TemplateBasics::class,
+        "template_type" => \kivweb\Views\TemplateBasics::PAGE_LOGIN,
+    ),
+
+    "registrace" => array(
+        "title" => "Registrace",
+        "controller_class_name" => \kivweb\Controllers\RegistrationController::class,
+        "view_class_name" => \kivweb\Views\TemplateBasics::class,
+        "template_type" => \kivweb\Views\TemplateBasics::PAGE_REGISTRATION,
+    ),
+    "clanky" => array(
+        "title" => "Články",
+        "controller_class_name" => \kivweb\Controllers\ArticlesController::class,
+        "view_class_name" => \kivweb\Views\TemplateBasics::class,
+        "template_type" => \kivweb\Views\TemplateBasics::PAGE_ARTICLES,
+    ),
 );
 ?>

@@ -5,6 +5,9 @@ namespace kivweb\Views;
 class TemplateBasics implements IView {
 
     const PAGE_INTRODUCTION = "IntroductionTemplate.tpl.php";
+    const PAGE_LOGIN = "LoginTemplate.tpl.php";
+    const PAGE_REGISTRATION = "RegistrationTemplate.tpl.php";
+    const PAGE_ARTICLES = "ArticlesTemplate.tpl.php";
 
     public function printOutput(array $templateData, string $pageType = self::PAGE_INTRODUCTION)
     {
@@ -48,8 +51,9 @@ class TemplateBasics implements IView {
                 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
                 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
             </head>
-            <body>
+            <body id="body">
 
         <?php
     }
@@ -57,7 +61,7 @@ class TemplateBasics implements IView {
     public function getHeader(){
         ?>
 
-        <header>
+        <header class="position-fixed w-100">
             <nav id="nav" class="navbar navbar-expand-lg navbar-light bg-light">
                 <div class="container">
                     <a class="navbar-brand" href="../../index.php?clanek=uvod">Vědecká konference</a>
@@ -68,13 +72,13 @@ class TemplateBasics implements IView {
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav ml-auto">
                             <li class="nav-item">
-                                <a class="nav-link" href="../../index.php?clanek=uvod">Úvod</a>
+                                <a class="nav-link" href="../../index.php?page=uvod">Úvod</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="../../index.php?clanek=clanky">Články</a>
+                                <a class="nav-link" href="../../index.php?page=clanky">Články</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="../../index.php?clanek=prihlaseni">Přihlášení</a>
+                                <a class="nav-link" href="../../index.php?page=prihlaseni">Přihlášení</a>
                             </li>
 
                         </ul>
@@ -82,16 +86,15 @@ class TemplateBasics implements IView {
                 </div>
             </nav>
         </header>
-
-
-
+        <article>
         <?php
     }
 
     public function getHTMLFooter(){
         ?>
+                </article>
                 <footer class="position-fixed d-flex justify-content-center align-items-center w-100">Semestrální práce z KIV/WEB; Pavel Čácha</footer>
-            <body>
+            </body>
         </html>
 
         <?php
