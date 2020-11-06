@@ -9,6 +9,7 @@ class TemplateBasics implements IView {
     const PAGE_REGISTRATION = "RegistrationTemplate.tpl.php";
     const PAGE_ARTICLES = "ArticlesTemplate.tpl.php";
     const PAGE_CREATE_ARTICEL = "CreateArticel.tpl.php";
+    const PAGE_MY_ARTICLES = "MyArticles.tpl.php";
 
     public function printOutput(array $templateData, string $pageType = self::PAGE_INTRODUCTION)
     {
@@ -31,7 +32,9 @@ class TemplateBasics implements IView {
         {
             foreach($output as $key => $value)
             {
-                $output[$key] = $this->protectTemplates($value);
+                if($key !== "abstract"){
+                    $output[$key] = $this->protectTemplates($value);
+                }
             }
             return $output;
         }

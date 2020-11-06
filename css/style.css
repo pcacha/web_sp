@@ -8,6 +8,7 @@
 
 header{
     top: 0;
+    z-index: 1;
 }
 
 #nav div div ul li div.my-dropdown > a{

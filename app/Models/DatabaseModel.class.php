@@ -20,8 +20,17 @@ class DatabaseModel {
     }
 
     public function getAllArticles() : array {
-        $query = "select * from cacha_articles";
+        $query = "select a.name, a.abstract, a.document_name, u.name as author, a.publish_date from 
+            (select * from cacha_articles where publish_date is not null) as a join cacha_users as u on a.author = u.id";
         return $this->queryAll($query);
+    }
+
+    public function getUserArticles($id)
+    {
+        $query = "select a.id, a.name, a.abstract, a.document_name, u.name as author, a.creation_date, a.publish_date, s.title as state, a.evaluation from 
+            (select * from cacha_articles where author = ?) as a join cacha_users as u on a.author = u.id
+                                                             join cacha_states as s on a.state = s.id";
+        return $this->queryAll($query, $id);
     }
 
     public function getUserName($name){
@@ -29,9 +38,24 @@ class DatabaseModel {
         return $this->queryOne($query, [$name]);
     }
 
+
+    public function getArticelName($name)
+    {
+        $query = "select name from cacha_articles where name = ?";
+        return $this->queryOne($query, [$name]);
+    }
+
     public function registrateUser($name, $pass){
         $query = "insert into cacha_users (name, password, reg_date) values (?, ?, ?)";
         $params = [$name, password_hash($pass, PASSWORD_DEFAULT), date("Y-m-d")];
+        return $this->query($query, $params);
+    }
+
+
+    public function addArticel($name, $abstract, $document_name)
+    {
+        $query = "insert into cacha_articles (name, abstract, document_name, author, creation_date) values (?, ?, ?, ?, ?)";
+        $params = [$name, $abstract, $document_name, $_SESSION["id"], date("Y-m-d")];
         return $this->query($query, $params);
     }
 

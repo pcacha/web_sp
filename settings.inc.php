@@ -12,6 +12,10 @@ define("REVIEWER","reviewer");
 define("AUTHOR","author");
 define("ALL", "all");
 
+define("ACCEPTED","accepted");
+define("REJECTED","rejected");
+define("REVIEWED","reviewed");
+
 const WEB_PAGES = array(
     "uvod" => array(
         "title" => "Úvodní stránka",
@@ -55,6 +59,13 @@ const WEB_PAGES = array(
         "controller_class_name" => \kivweb\Controllers\CreateArticelController::class,
         "view_class_name" => \kivweb\Views\TemplateBasics::class,
         "template_type" => \kivweb\Views\TemplateBasics::PAGE_CREATE_ARTICEL,
+        "access" => [AUTHOR],
+    ),
+    "mojeClanky" => array(
+        "title" => "Moje Články",
+        "controller_class_name" => \kivweb\Controllers\MyArticlesController::class,
+        "view_class_name" => \kivweb\Views\TemplateBasics::class,
+        "template_type" => \kivweb\Views\TemplateBasics::PAGE_MY_ARTICLES,
         "access" => [AUTHOR],
     ),
 );

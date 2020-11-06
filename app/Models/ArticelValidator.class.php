@@ -1,7 +1,7 @@
 <?php
 namespace kivweb\Models;
 
-class AccountValidator{
+class ArticelValidator {
     private $db;
 
     public function __construct(){
@@ -9,14 +9,14 @@ class AccountValidator{
     }
 
     public function nameLength($name):bool{
-        if(strlen($name) < 101){
+        if(strlen($name) < 256){
             return true;
         }
         return false;
     }
 
     public function nameUnique($name):bool{
-        $res = $this->db->getUserName($name);
+        $res = $this->db->getArticelName($name);
         if($res == null){
             return true;
         }
