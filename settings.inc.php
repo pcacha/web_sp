@@ -89,5 +89,19 @@ const WEB_PAGES = array(
         "template_type" => \kivweb\Views\TemplateBasics::PAGE_MY_REVIEWS,
         "access" => [REVIEWER],
     ),
+    "spravceUzivatelu" => array(
+        "title" => "Správa uživatelů",
+        "controller_class_name" => \kivweb\Controllers\ManageUsersController::class,
+        "view_class_name" => \kivweb\Views\TemplateBasics::class,
+        "template_type" => \kivweb\Views\TemplateBasics::PAGE_USER_MANAGER,
+        "access" => [ADMIN],
+    ),
+    "zpracujPozadavek" => array(
+        "title" => "Zpracování požadavku",
+        "controller_class_name" => \kivweb\Controllers\HandleAjaxController::class,
+        "view_class_name" => \kivweb\Views\TemplateBasics::class,
+        "template_type" => \kivweb\Views\TemplateBasics::PAGE_INTRODUCTION,
+        "access" => [ADMIN],
+    ),
 );
 ?>

@@ -157,6 +157,89 @@ class DatabaseModel {
         return true;
     }
 
+    public function getUsers()
+    {
+        $query = "select u.id, u.name, u.reg_date, u.banned, 
+CASE
+    WHEN u.id in (select cacha_users.id from cacha_users join cacha_user_role on cacha_users.id = cacha_user_role.user_id join cacha_roles on cacha_roles.id = cacha_user_role.role_id where cacha_roles.title = 'author') THEN '1'   
+    ELSE '0'
+END AS isAuthor,
+CASE
+    WHEN u.id in (select cacha_users.id from cacha_users join cacha_user_role on cacha_users.id = cacha_user_role.user_id join cacha_roles on cacha_roles.id = cacha_user_role.role_id where cacha_roles.title = 'reviewer') THEN '1'  
+    ELSE '0'
+END AS isReviewer
+from cacha_users as u where 'admin' not in 
+	(select title from cacha_user_role as ur 
+     	join cacha_roles as r on ur.role_id = r.id
+    	where ur.user_id = u.id)";
+        return $this->queryAll($query);
+    }
+
+    public function setAuthorRole($id, $value)
+    {
+        if($value == "0"){
+
+            $query = "delete from cacha_user_role where user_id = ? and role_id = 1";
+            $params = [$id];
+            return $this->query($query, $params);
+        }
+        else{
+            $query = "select * from cacha_user_role where user_id = ? and role_id = 1";
+            $params = [$id];
+            $res = $this->query($query, $params);
+            if($res !== null && $res !== false){
+                $query = "insert into cacha_user_role (user_id, role_id) values (?, 1)";
+                $params = [$id];
+                return $this->query($query, $params);
+            }
+            else{
+                return true;
+            }
+        }
+    }
+
+    public function setRevRole($id, string $value)
+    {
+        if($value == "0"){
+
+            $query = "delete from cacha_user_role where user_id = ? and role_id = 2";
+            $params = [$id];
+            return $this->query($query, $params);
+        }
+        else{
+            $query = "select * from cacha_user_role where user_id = ? and role_id = 2";
+            $params = [$id];
+            $res = $this->query($query, $params);
+            if($res !== null && $res !== false){
+                $query = "insert into cacha_user_role (user_id, role_id) values (?, 2)";
+                $params = [$id];
+                return $this->query($query, $params);
+            }
+            else{
+                return true;
+            }
+        }
+    }
+
+    public function setBan($id, string $value)
+    {
+        $query = "update cacha_users set banned = ? where id = ?";
+        $params = [$value, $id];
+        return $this->query($query, $params);
+    }
+
+    public function deleteById($id)
+    {
+        $query = "delete from cacha_users where id = ?";
+        $params = [$id];
+        $res1 =  $this->query($query, $params);
+
+        $query = "delete from cacha_user_role where user_id = ?";
+        $params = [$id];
+        $res2 =  $this->query($query, $params);
+        return ($res1 && $res2);
+    }
+
     private function query($query, $params = array()){
         $statement = $this->pdo->prepare($query);
         return $statement->execute($params);
@@ -174,12 +257,6 @@ class DatabaseModel {
         $statement = $this->pdo->prepare($query);
         $statement->execute($params);
         return $statement->fetchAll();
-    }
-
-    private function queryColumn($query, $params = array())
-    {
-        $res = $this->queryOne($query, $params);
-        return $res[0];
     }
 }
 ?>
