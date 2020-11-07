@@ -21,7 +21,7 @@ class DatabaseModel {
 
     public function getAllArticles() : array {
         $query = "select a.name, a.abstract, a.document_name, u.name as author, a.publish_date from 
-            (select * from cacha_articles where publish_date is not null) as a join cacha_users as u on a.author = u.id";
+            (select * from cacha_articles where publish_date is not null and state = 2) as a join cacha_users as u on a.author = u.id";
         return $this->queryAll($query);
     }
 
@@ -29,8 +29,9 @@ class DatabaseModel {
     {
         $query = "select a.id, a.name, a.abstract, a.document_name, u.name as author, a.creation_date, a.publish_date, s.title as state, a.evaluation from 
             (select * from cacha_articles where author = ?) as a join cacha_users as u on a.author = u.id
-                                                             join cacha_states as s on a.state = s.id";
-        return $this->queryAll($query, $id);
+                                                             join cacha_states as s on a.state = s.id
+                                                             order by a.state";
+        return $this->queryAll($query, [$id]);
     }
 
     public function getUserName($name){
@@ -59,6 +60,13 @@ class DatabaseModel {
         return $this->query($query, $params);
     }
 
+    public function modifyArticel($name, $abstract, string $document_name, $id)
+    {
+        $query = "update cacha_articles set name = ?, abstract = ?, document_name = ? where id = ?";
+        $params = [$name, $abstract, $document_name, $id];
+        return $this->query($query, $params);
+    }
+
     public function addAuthorRole($name){
         $query = "insert into cacha_user_role (user_id, role_id) values ((select id from cacha_users where name = ?), 1)";
         $params = [$name];
@@ -79,6 +87,18 @@ class DatabaseModel {
         $query = "select * from cacha_users where name = ?";
         $params = [$name];
         return $this->queryOne($query, $params);
+    }
+
+    public function canModifyArticel($idArticel, $idAutor)
+    {
+        $query = "select * from cacha_articles where id=? and author = ? and state = 1";
+        $params = [$idArticel, $idAutor];
+        $res = $this->queryOne($query, $params);
+
+        if($res === false || $res === null){
+            return null;
+        }
+        return $res;
     }
 
     private function query($query, $params = array()){
