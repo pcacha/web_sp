@@ -101,6 +101,38 @@ class DatabaseModel {
         return $res;
     }
 
+
+    public function getMyArticlesToRev($id)
+    {
+        $query = "select a.*, u.name as author  from cacha_articles as a 
+                    join cacha_reviews as r on a.id = r.article_id
+                    join cacha_users as u on u.id = a.author
+                    where r.user_id = ? and a.state = 1";
+        return $this->queryAll($query, [$id]);
+    }
+
+    public function canReviewArticel($articel_id, $user_id)
+    {
+        $query = "select r.id as review_id, r.evaluation, r.stars_count, r.recommended, r.article_id, r.user_id from cacha_articles as a 
+                    join cacha_reviews as r on a.id = r.article_id
+                    join cacha_users as u on u.id = r.user_id
+                    where a.id = ? and u.id = ? and a.state = 1";
+        $params = [$articel_id, $user_id];
+        $res = $this->queryOne($query, $params);
+
+        if($res === false || $res === null){
+            return null;
+        }
+        return $res;
+    }
+
+    public function addReview($stars, int $rec, $eval, $id)
+    {
+        $query = "update cacha_reviews set stars_count = ?, recommended = ?, evaluation = ? where id = ?";
+        $params = [$stars, $rec, $eval, $id];
+        return $this->query($query, $params);
+    }
+
     private function query($query, $params = array()){
         $statement = $this->pdo->prepare($query);
         return $statement->execute($params);

@@ -10,6 +10,8 @@ class TemplateBasics implements IView {
     const PAGE_ARTICLES = "ArticlesTemplate.tpl.php";
     const PAGE_CREATE_ARTICEL = "CreateArticel.tpl.php";
     const PAGE_MY_ARTICLES = "MyArticles.tpl.php";
+    const PAGE_ARTICELS_TO_REVIEW = "ArticlesToReview.tpl.php";
+    const PAGE_REVIEW_ARTICEL = "ReviewArticel.tpl.php";
 
     public function printOutput(array $templateData, string $pageType = self::PAGE_INTRODUCTION)
     {
@@ -101,7 +103,7 @@ class TemplateBasics implements IView {
 
                             <?php if(isset($tplData["roles"]) && in_array(REVIEWER, $tplData["roles"])): ?>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="../../index.php?page=recenzovat">RECENZOVAT</a>
+                                    <a class="nav-link" href="../../index.php?page=recenzeClanky">RECENZOVAT</a>
                                 </li>
                             <?php endif; ?>
 

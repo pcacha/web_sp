@@ -68,5 +68,19 @@ const WEB_PAGES = array(
         "template_type" => \kivweb\Views\TemplateBasics::PAGE_MY_ARTICLES,
         "access" => [AUTHOR],
     ),
+    "recenzeClanky" => array(
+        "title" => "Články k Recenzování",
+        "controller_class_name" => \kivweb\Controllers\ArticlesToReviewController::class,
+        "view_class_name" => \kivweb\Views\TemplateBasics::class,
+        "template_type" => \kivweb\Views\TemplateBasics::PAGE_ARTICELS_TO_REVIEW,
+        "access" => [REVIEWER],
+    ),
+    "recenzovat" => array(
+        "title" => "Recenzovat Článek",
+        "controller_class_name" => \kivweb\Controllers\ReviewArticelController::class,
+        "view_class_name" => \kivweb\Views\TemplateBasics::class,
+        "template_type" => \kivweb\Views\TemplateBasics::PAGE_REVIEW_ARTICEL,
+        "access" => [REVIEWER],
+    ),
 );
 ?>
