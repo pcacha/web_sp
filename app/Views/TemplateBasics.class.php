@@ -12,6 +12,7 @@ class TemplateBasics implements IView {
     const PAGE_MY_ARTICLES = "MyArticles.tpl.php";
     const PAGE_ARTICELS_TO_REVIEW = "ArticlesToReview.tpl.php";
     const PAGE_REVIEW_ARTICEL = "ReviewArticel.tpl.php";
+    const PAGE_MY_REVIEWS = "MyReviews.tpl.php";
 
     public function printOutput(array $templateData, string $pageType = self::PAGE_INTRODUCTION)
     {

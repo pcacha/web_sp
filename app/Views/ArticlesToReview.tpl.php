@@ -12,7 +12,7 @@ global $tplData;
                         <div class="col-3">
                             <h4 class="card-title font-italic"><?= $item["name"] ?></h4>
                             <a class="btn btn-success" target="_blank" href="<?= "uploads/".$item['document_name'] ?>"><i class="fa fa-floppy-o"></i> Stáhnout Článek</a>
-                            <a class="btn btn-secondary mt-2" href="../../index.php?page=recenzovat&id=<?= $item["id"] ?>"><i class="fa fa-pencil-square"></i> Recenzovat Článek</a>
+                            <a class="btn btn-secondary mt-2" href="../../index.php?page=recenzovat&articel_id=<?= $item["id"] ?>"><i class="fa fa-pencil-square"></i> Recenzovat Článek</a>
                             <p class="card-text text-info"> <br> <span class="font-weight-bold"> <?= $item["author"] ?> </span> <br> <?= date("d.m. Y", strtotime( $item["publish_date"]))?></p>
                         </div>
                         <div class="col-9">

@@ -82,5 +82,12 @@ const WEB_PAGES = array(
         "template_type" => \kivweb\Views\TemplateBasics::PAGE_REVIEW_ARTICEL,
         "access" => [REVIEWER],
     ),
+    "mojeRecenze" => array(
+        "title" => "Moje Recenze",
+        "controller_class_name" => \kivweb\Controllers\MyReviewsController::class,
+        "view_class_name" => \kivweb\Views\TemplateBasics::class,
+        "template_type" => \kivweb\Views\TemplateBasics::PAGE_MY_REVIEWS,
+        "access" => [REVIEWER],
+    ),
 );
 ?>

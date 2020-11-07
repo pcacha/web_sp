@@ -15,11 +15,9 @@ global $tplData;
             <div class="form-group">
                 <label for="stars" id="starsLabel" class="font-weight-bold">Počet hvězd:</label>
                 <select class="form-control" id="stars" name="stars" required>
-                    <option value="1" selected>1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
+                    <?php for($i = 1; $i < 6; $i++) { ?>
+                        <option value="<?= $i ?>" <?php if ($i == $tplData["rev_star_count"]) echo("selected") ?>><?= $i ?></option>
+                    <?php } ?>
                 </select>
                 <script>
                     function setStars(count) {
@@ -38,13 +36,35 @@ global $tplData;
 
             <p class="font-weight-bold">Doporučit k publikaci:</p>
             <div class="form-check">
-                <input class="form-check-input" type="radio" name="recommend" id="yes" value="yes" checked required>
+                <input class="form-check-input" type="radio" name="recommend" id="yes" value="yes"
+                <?php
+                    if(isset($tplData["rev_recom"])){
+                        $recom = $tplData["rev_recom"];
+                        if($recom == 1){
+                            echo("checked");
+                        }
+                    }
+                    else{
+                        echo("checked");
+                    }
+                ?>
+                 required>
                 <label class="form-check-label" for="yes">
                     Ano
                 </label>
             </div>
             <div class="form-check">
-                <input class="form-check-input" type="radio" name="recommend" id="no" value="no">
+                <input class="form-check-input" type="radio" name="recommend" id="no" value="no" required
+                    <?php
+                    if(isset($tplData["rev_recom"])){
+                        $recom = $tplData["rev_recom"];
+                        if($recom == 0){
+                            echo("checked");
+                        }
+                    }
+
+                    ?>
+                >
                 <label class="form-check-label" for="no">
                     Ne
                 </label>
@@ -52,10 +72,14 @@ global $tplData;
 
             <div class="form-group mt-3">
                 <label for="eval" class="font-weight-bold">Zhodnocení: </label>
-                <textarea class="form-control" id="eval" name="eval" rows="5" required>Zde napište své hodnocení</textarea>
+                <textarea class="form-control" id="eval" name="eval" rows="5" required><?php if(isset($tplData["rev-eval"])){ echo($tplData["rev-eval"]);
+                        }
+                        else{
+                            echo("Zde napište své hodnocení");
+                        }
+                    ?>
+                </textarea>
             </div>
-
-            <input type="hidden" name="id" value="<?= $tplData["articel_id"] ?>">
 
             <p class="text-center mt-5">
                 <button type="submit" class="btn btn-lg btn-primary">Odeslat Recenzi</button>

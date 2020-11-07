@@ -107,7 +107,7 @@ class DatabaseModel {
         $query = "select a.*, u.name as author  from cacha_articles as a 
                     join cacha_reviews as r on a.id = r.article_id
                     join cacha_users as u on u.id = a.author
-                    where r.user_id = ? and a.state = 1";
+                    where r.user_id = ? and a.state = 1 and r.evaluation is null";
         return $this->queryAll($query, [$id]);
     }
 
@@ -131,6 +131,30 @@ class DatabaseModel {
         $query = "update cacha_reviews set stars_count = ?, recommended = ?, evaluation = ? where id = ?";
         $params = [$stars, $rec, $eval, $id];
         return $this->query($query, $params);
+    }
+
+    public function getMyReviews($userId)
+    {
+        $query = "select r.stars_count, r.recommended, r.evaluation, r.id as review_id, a.name as articel_name, u.name as articel_author, a.id as articel_id, a.state as articel_state 
+						from cacha_reviews as r
+	                     join cacha_articles as a on r.article_id = a.id
+                         join cacha_users as u on a.author = u.id
+                         where r.user_id = ? and r.evaluation is not null";
+        return $this->queryAll($query, [$userId]);
+    }
+
+    public function canModifyReview($review_id, $user_id)
+    {
+        $query = "select * from (select * from cacha_reviews where id=? and user_id = ?) as r
+                    join cacha_articles as a on a.id = r.article_id
+                    where a.state = 1";
+        $params = [$review_id, $user_id];
+        $res = $this->queryOne($query, $params);
+
+        if($res === false || $res === null){
+            return false;
+        }
+        return true;
     }
 
     private function query($query, $params = array()){
