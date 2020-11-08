@@ -67,12 +67,9 @@ h3{
 }
 
 .login-div{
-    width: 600px;
-    height: auto;
     background: white url("../images/gray-noise.png") repeat;
 }
 
 .create-articel{
-    width: 960px;
     background: white url("../images/gray-noise.png") repeat;
 }

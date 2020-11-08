@@ -29,5 +29,6 @@ class ApplicationStart {
         $view = new $pageInfo["view_class_name"];
         $view->printOutput($tplData, $pageInfo["template_type"]);
     }
+
 }
 ?>

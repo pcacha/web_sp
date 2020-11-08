@@ -117,5 +117,19 @@ const WEB_PAGES = array(
         "template_type" => \kivweb\Views\TemplateBasics::PAGE_INTRODUCTION,
         "access" => [ADMIN],
     ),
+    "showReviews" => array(
+        "title" => "Přehled recenzí",
+        "controller_class_name" => \kivweb\Controllers\ShowReviewsController::class,
+        "view_class_name" => \kivweb\Views\TemplateBasics::class,
+        "template_type" => \kivweb\Views\TemplateBasics::PAGE_SHOW_REVIEWS,
+        "access" => [ADMIN],
+    ),
+    "decide" => array(
+        "title" => "Rozhodnutí o publikaci",
+        "controller_class_name" => \kivweb\Controllers\DecideController::class,
+        "view_class_name" => \kivweb\Views\TemplateBasics::class,
+        "template_type" => \kivweb\Views\TemplateBasics::PAGE_DECIDE,
+        "access" => [ADMIN],
+    )
 );
 ?>

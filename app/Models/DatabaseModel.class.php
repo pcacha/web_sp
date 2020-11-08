@@ -265,6 +265,31 @@ from cacha_users as u where 'admin' not in
         return $this->query($query, $params);
     }
 
+    public function getArticelRevs($articel_id)
+    {
+        $query = "select r.stars_count, r.recommended, r.evaluation, r.id as review_id, a.name as articel_name, u.name as rev_author, a.id as articel_id, a.state as articel_state 
+						from cacha_reviews as r
+	                     join cacha_articles as a on r.article_id = a.id
+                         join cacha_users as u on r.user_id = u.id
+                         where a.id = ? and r.evaluation is not null and a.evaluation is null";
+        return $this->queryAll($query, [$articel_id]);
+    }
+
+    public function updateArticel(int $state, $eval, $id)
+    {
+        $query = "update cacha_articles set publish_date = ?, state = ?, evaluation  = ? where id = ?";
+        $params = [date("Y-m-d"), $state, $eval, $id];
+        return $this->query($query, $params);
+    }
+
+    public function getRevCount($articel_id)
+    {
+        $query = "select count(*) as count from cacha_reviews as r where r.article_id = ?";
+        $params = [$articel_id];
+        $res = $this->queryOne($query, $params);
+        return $res["count"];
+    }
+
     private function query($query, $params = array()){
         $statement = $this->pdo->prepare($query);
         return $statement->execute($params);

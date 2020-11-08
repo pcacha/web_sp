@@ -3,7 +3,7 @@ global $tplData;
 
 ?>
 <section>
-    <div class="mx-auto mt-5 border rounded p-md-5 p-2 create-articel container">
+    <div class="mx-auto mt-5 border rounded p-md-5 p-2 container create-articel">
 
         <?php foreach ($tplData["reviews"] as $item): ?>
             <div class="card mb-4" >
@@ -11,11 +11,7 @@ global $tplData;
                     <div class="row">
                         <div class="col-12 col-md-3">
                             <h4 class="card-title font-italic"><?= $item["articel_name"] ?></h4>
-                            <p class="card-text text-info"> <?=  $item["articel_author"] ?></p>
-
-                            <?php if($item["articel_state"] == 1): ?>
-                                <a class="btn btn-secondary text-white my-2" href="../../index.php?page=recenzovat&articel_id=<?= $item["articel_id"] ?>&review_id=<?= $item["review_id"] ?>"><i class="fa fa-pencil-square"></i> Upravit Recenzi</a>
-                            <?php endif; ?>
+                            <p class="card-text text-info"> <?=  $item["rev_author"] ?></p>
 
                         </div>
 

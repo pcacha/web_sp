@@ -3,7 +3,7 @@ global $tplData;
 
 ?>
 <section>
-    <div class="mx-auto mt-5 border rounded p-5 create-articel">
+    <div class="mx-auto mt-5 border rounded p-2 p-md-5 container create-articel">
 
         <?php if(isset($tplData["message"])): ?>
             <div class="alert <?php echo($tplData["res"] ? "alert-success" : "alert-danger"); ?>" role="alert">

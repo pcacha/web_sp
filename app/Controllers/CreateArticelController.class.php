@@ -49,7 +49,8 @@ class CreateArticelController implements IController
                     $tplData["message"] = "Jméno je moc dlouhé";
                     return $tplData;
                 }
-                if(!$validator->nameUnique($name)){
+
+                if(!$validator->nameUnique($name) && !isset($_POST["id"])){
                     $tplData["message"] = "Jméno je již obsazené";
                     return $tplData;
                 }

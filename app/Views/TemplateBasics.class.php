@@ -15,6 +15,8 @@ class TemplateBasics implements IView {
     const PAGE_MY_REVIEWS = "MyReviews.tpl.php";
     const PAGE_USER_MANAGER = "UserManager.tpl.php";
     const PAGE_ARTICLES_MANAGER = "ArticlesManager.tpl.php";
+    const PAGE_SHOW_REVIEWS = "ShowReviews.tpl.php";
+    const PAGE_DECIDE = "Decide.tpl.php";
 
     public function printOutput(array $templateData, string $pageType = self::PAGE_INTRODUCTION)
     {
@@ -118,7 +120,7 @@ class TemplateBasics implements IView {
 
 
                             <?php if(isset($tplData["name"])): ?>
-                                <li class="nav-item dropdown" style="align-self: center;">
+                                <li class="nav-item dropdown">
                                     <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <?= $tplData["name"]?> <i class="fa fa-user" aria-hidden="true"></i>
                                     </a>
@@ -158,6 +160,15 @@ class TemplateBasics implements IView {
         </html>
 
         <?php
+    }
+
+    public static function cutText($text){
+        $res = "";
+        for($i=0; $i < 97; $i++)
+        {
+            $res .= $text[$i];
+        }
+        return $res."...";
     }
 }
 ?>

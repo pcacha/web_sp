@@ -3,7 +3,7 @@ global $tplData;
 
 ?>
 <section>
-    <div class="mx-auto bg-white mt-5 border rounded p-5 login-div">
+    <div class="mx-auto bg-white mt-5 border rounded p-2 p-md-5 container login-div" style="max-width: 600px;">
         <?php if (isset($tplData["message"])) : ?>
             <div class="alert alert-danger" role="alert">
                 <?= $tplData["message"] ?>

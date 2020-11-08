@@ -3,7 +3,7 @@ global $tplData;
 
 ?>
 <section>
-    <div class="mx-auto mt-5 border rounded p-5 create-articel">
+    <div class="mx-auto mt-5 border rounded p-md-5 p-2 container create-articel">
 
         <table class="table table-dark table-striped table-bordered table-hover">
             <thead class="thead-light">
