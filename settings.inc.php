@@ -103,5 +103,19 @@ const WEB_PAGES = array(
         "template_type" => \kivweb\Views\TemplateBasics::PAGE_INTRODUCTION,
         "access" => [ADMIN],
     ),
+    "spravceClanku" => array(
+        "title" => "Správa článků",
+        "controller_class_name" => \kivweb\Controllers\ArticlesManagerController::class,
+        "view_class_name" => \kivweb\Views\TemplateBasics::class,
+        "template_type" => \kivweb\Views\TemplateBasics::PAGE_ARTICLES_MANAGER,
+        "access" => [ADMIN],
+    ),
+    "zpracujPrirazeni" => array(
+        "title" => "Přiřazení k recenzi",
+        "controller_class_name" => \kivweb\Controllers\HandleReviewerToArticelController::class,
+        "view_class_name" => \kivweb\Views\TemplateBasics::class,
+        "template_type" => \kivweb\Views\TemplateBasics::PAGE_INTRODUCTION,
+        "access" => [ADMIN],
+    ),
 );
 ?>

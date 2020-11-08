@@ -16,7 +16,7 @@ global $tplData;
                 <label for="stars" id="starsLabel" class="font-weight-bold">Počet hvězd:</label>
                 <select class="form-control" id="stars" name="stars" required>
                     <?php for($i = 1; $i < 6; $i++) { ?>
-                        <option value="<?= $i ?>" <?php if ($i == $tplData["rev_star_count"]) echo("selected") ?>><?= $i ?></option>
+                        <option value="<?= $i ?>" <?php if(isset($tplData["rev_star_count"])) if ($i == $tplData["rev_star_count"]) echo("selected") ?>><?= $i ?></option>
                     <?php } ?>
                 </select>
                 <script>

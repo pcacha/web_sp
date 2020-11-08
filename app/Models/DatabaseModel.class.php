@@ -25,6 +25,13 @@ class DatabaseModel {
         return $this->queryAll($query);
     }
 
+    public function getReviewedArticles()
+    {
+        $query = "select a.id, a.name, a.abstract, a.document_name, u.name as author, a.author as author_id, a.creation_date from 
+            (select * from cacha_articles where state = 1) as a join cacha_users as u on a.author = u.id";
+        return $this->queryAll($query);
+    }
+
     public function getUserArticles($id)
     {
         $query = "select a.id, a.name, a.abstract, a.document_name, u.name as author, a.creation_date, a.publish_date, s.title as state, a.evaluation from 
@@ -238,6 +245,24 @@ from cacha_users as u where 'admin' not in
         $params = [$id];
         $res2 =  $this->query($query, $params);
         return ($res1 && $res2);
+    }
+
+    public function getPosRevs($articel_id, $author_id)
+    {
+        $query = "select u.id as user_id, u.name as user_name, ? as articel_id from cacha_users as u 
+                    join cacha_user_role as ur on ur.user_id = u.id
+                    where u.id != ? and ur.role_id = 2 and u.id not in (    
+                	select u2.id from cacha_users as u2
+                     join cacha_reviews as r on u2.id = r.user_id
+                     where r.article_id = ?)";
+        return $this->queryAll($query, [$articel_id, $author_id, $articel_id]);
+    }
+
+    public function setArticelToReviewer($user_id, $articel_id)
+    {
+        $query = "insert into cacha_reviews (article_id, user_id) values (?, ?)";
+        $params = [$articel_id, $user_id];
+        return $this->query($query, $params);
     }
 
     private function query($query, $params = array()){
