@@ -17,6 +17,8 @@ class TemplateBasics implements IView {
     const PAGE_ARTICLES_MANAGER = "ArticlesManager.tpl.php";
     const PAGE_SHOW_REVIEWS = "ShowReviews.tpl.php";
     const PAGE_DECIDE = "Decide.tpl.php";
+    const PAGE_REVIEWERS = "ReviewersList.tpl.php";
+    const PAGE_MY_DATA = "MyData.tpl.php";
 
     public function printOutput(array $templateData, string $pageType = self::PAGE_INTRODUCTION)
     {
@@ -130,6 +132,9 @@ class TemplateBasics implements IView {
                                         <?php endif; ?>
                                         <?php if(isset($tplData["roles"]) && in_array(REVIEWER, $tplData["roles"])): ?>
                                         <a class="dropdown-item" href="../../index.php?page=mojeRecenze">Moje Recenze</a>
+                                        <?php endif; ?>
+                                        <?php if(isset($tplData["roles"]) && (in_array(AUTHOR, $tplData["roles"]) || in_array(REVIEWER, $tplData["roles"]) ||in_array(ADMIN, $tplData["roles"]))): ?>
+                                            <a class="dropdown-item" href="../../index.php?page=mojeUdaje">Moje Údaje</a>
                                         <?php endif; ?>
                                         <div class="dropdown-divider"></div>
                                         <a class="dropdown-item" href="../../index.php?page=odhlasit">Odhlásit</a>

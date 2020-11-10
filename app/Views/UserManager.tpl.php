@@ -5,6 +5,8 @@ global $tplData;
 <section>
     <div class="mx-auto mt-5 border rounded p-md-5 p-2 container create-articel">
 
+        <h2 class="mb-5">Správce Uživatelů</h2>
+
         <table class="table table-dark table-striped table-bordered table-hover">
             <thead class="thead-light">
             <tr>
@@ -46,12 +48,14 @@ global $tplData;
         let url = "index.php?page=zpracujPozadavek&action=setAuthor&value="+value+"&id="+$(this).attr("data-myAut");
         fetch(url).then(res => {
             res.json().then(data => {
+                console.log(data);
                 if(!data){
+                    window.alert("Operace se nezdařila");
                     let status = $(this).prop('checked');
                     $(this).prop('checked', !status);
                 }
             });
-        })
+        });
     });
 
     let revCheckboxes = $('.myRev');
@@ -60,12 +64,14 @@ global $tplData;
         let url = "index.php?page=zpracujPozadavek&action=setRev&value="+value+"&id="+$(this).attr("data-myRev");
         fetch(url).then(res => {
             res.json().then(data => {
+                console.log(data);
                 if(!data){
+                    window.alert("Operace se nezdařila");
                     let status = $(this).prop('checked');
                     $(this).prop('checked', !status);
                 }
             });
-        })
+        });
     });
 
     let banCheckboxes = $('.myBan');
@@ -74,24 +80,33 @@ global $tplData;
         let url = "index.php?page=zpracujPozadavek&action=setBan&value="+value+"&id="+$(this).attr("data-myBan");
         fetch(url).then(res => {
             res.json().then(data => {
+                console.log(data);
                 if(!data){
+                    window.alert("Operace se nezdařila");
                     let status = $(this).prop('checked');
                     $(this).prop('checked', !status);
                 }
             });
-        })
+        });
     });
 
     let deleteBtns = $('.myDel');
     $(deleteBtns).click(function() {
-        let url = "index.php?page=zpracujPozadavek&action=delete&value=0&id="+$(this).attr("data-myDel");
-        fetch(url).then(res => {
-            res.json().then(data => {
-                if(data){
-                    let tr = $(this).closest("tr");
-                    $(tr).remove();
-                }
+        if(confirm("Opravdu si přejete tohoto uživatele smazat?")){
+            let url = "index.php?page=zpracujPozadavek&action=delete&value=0&id="+$(this).attr("data-myDel");
+            fetch(url).then(res => {
+                res.json().then(data => {
+                    console.log(data);
+                    if(data){
+                        let tr = $(this).closest("tr");
+                        $(tr).remove();
+                    }
+                    else
+                    {
+                        window.alert("Operace se nezdařila");
+                    }
+                });
             });
-        })
+        }
     });
 </script>

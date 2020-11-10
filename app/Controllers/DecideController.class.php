@@ -21,6 +21,13 @@ class DecideController implements IController {
 
         $tplData["res"] = false;
 
+        if(!isset($_GET["articel_id"]) || !$_GET["articel_id"]){
+            header("Location: index.php");
+            exit;
+        }
+
+        $tplData["articel_name"] = $this->db->getArticelNameById($_GET["articel_id"]);
+
         if($_POST){
             if(isset($_POST["publish"]) && $_POST["publish"]
                 && isset($_POST["eval"]) && $_POST["eval"]

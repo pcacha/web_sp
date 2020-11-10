@@ -5,6 +5,8 @@ global $tplData;
 <section>
     <div class="mx-auto mt-5 border rounded p-2 p-md-5 container create-articel">
 
+        <h2 class="mb-5">Vytvořit Nový Článek</h2>
+
         <?php if(isset($tplData["message"])): ?>
             <div class="alert <?php echo($tplData["res"] ? "alert-success" : "alert-danger"); ?>" role="alert">
                 <?= $tplData["message"] ?>

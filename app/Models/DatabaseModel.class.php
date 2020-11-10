@@ -243,8 +243,8 @@ from cacha_users as u where 'admin' not in
 
         $query = "delete from cacha_user_role where user_id = ?";
         $params = [$id];
-        $res2 =  $this->query($query, $params);
-        return ($res1 && $res2);
+        $this->query($query, $params);
+        return $res1;
     }
 
     public function getPosRevs($articel_id, $author_id)
@@ -288,6 +288,52 @@ from cacha_users as u where 'admin' not in
         $params = [$articel_id];
         $res = $this->queryOne($query, $params);
         return $res["count"];
+    }
+
+    public function getArticelById($articel_id)
+    {
+        $query = "select name from cacha_articles where id = ?";
+        $params = [$articel_id];
+        $res = $this->queryOne($query, $params);
+        return $res["name"];
+    }
+
+    public function getReviewersOfArticel($articel_id)
+    {
+        $query = "select u.* from cacha_users as u
+	                 join cacha_reviews as r on u.id = r.user_id
+                     where r.article_id = ?";
+        return $this->queryAll($query, [$articel_id]);
+    }
+
+    public function updateUser($name, $pass1, $current_user_id)
+    {
+        $query = "update cacha_users set name = ?, password = ? where id = ?";
+        $params = [$name, password_hash($pass1, PASSWORD_DEFAULT), $current_user_id];
+        return $this->query($query, $params);
+    }
+
+    public function getUserById($id)
+    {
+        $query = "select * from cacha_users where id = ?";
+        $params = [$id];
+        return $this->queryOne($query, $params);
+    }
+
+
+    public function updateUserName($name, $current_user_id)
+    {
+        $query = "update cacha_users set name = ? where id = ?";
+        $params = [$name, $current_user_id];
+        return $this->query($query, $params);
+    }
+
+    public function getArticelNameById($articel_id)
+    {
+        $query = "select name from cacha_articles where id = ?";
+        $params = [$articel_id];
+        $res = $this->queryOne($query, $params);
+        return $res["name"];
     }
 
     private function query($query, $params = array()){

@@ -24,20 +24,20 @@ global $tplData;
                     <p>Stránky jsou určené pro každého, kdo chce přispět jakýmkoliv článkem týkajícím se vědy</p>
                 </div>
             </div>
-            <div class="row mt-5 bottom-padding">
-                <div class="col">
+            <div class="row mt-3 bottom-padding">
+                <div class="col mt-2">
                     <div class="my-card border rounded ">
                         <h3>Nekonečný <br> Vesmír</h3>
                         <p>Připoj se s námi na tajuponé cestě hlubokým vesmírem!</p>
                     </div>
                 </div>
-                <div class="col">
+                <div class="col mt-2">
                     <div class="my-card">
                         <h3>Informační Technologie</h3>
                         <p>Automatizovné systémy pomáhají vytvářet města nové generace!</p>
                     </div>
                 </div>
-                <div class="col">
+                <div class="col mt-2">
                     <div class="my-card">
                         <h3>Lidské <br>tělo</h3>
                         <p>Pojď se něco dozvědět o tom, jak funguje lidksé tělo a jeho procesy!</p>

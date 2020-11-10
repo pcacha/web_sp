@@ -55,6 +55,13 @@ class CreateArticelController implements IController
                     return $tplData;
                 }
 
+                $finfo = finfo_open(FILEINFO_MIME_TYPE);
+                $mime = finfo_file($finfo, $_FILES['articel']['tmp_name']);
+                if ($mime !== 'application/pdf') {
+                    $tplData["message"] = "Vkládejte pouze pdf dokumenty";
+                    return $tplData;
+                }
+
                 if(!isset($_POST["id"])){
                     $document_name = time()."_".$_FILES["articel"]["name"];
                     $added = $this->db->addArticel($name, $abstract, $document_name);

@@ -26,6 +26,7 @@ class HandleAjaxController implements IController {
         $id = $_GET["id"];
 
         if($value !== "0" && $value !== "1"){
+            header('Content-type: application/json');
             echo json_encode(false);
             exit;
         }
@@ -47,9 +48,11 @@ class HandleAjaxController implements IController {
         }
 
         if($res){
+            header('Content-type: application/json');
             echo json_encode(true);
             exit;
         }
+        header('Content-type: application/json');
         echo json_encode(false);
         exit;
     }

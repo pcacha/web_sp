@@ -2,11 +2,10 @@
 
 namespace kivweb\Controllers;
 
-use kivweb\Models\AjaxResult;
 use kivweb\Models\DatabaseModel as db;
 use kivweb\Models\SessionManager;
 
-class HandleReviewerToArticelController implements IController {
+class ReviewersListController implements IController {
     private $db;
     private $session;
 
@@ -16,20 +15,21 @@ class HandleReviewerToArticelController implements IController {
     }
 
     public function show(string $pageTitle):array {
-        if(!(isset($_GET["user_id"])) || !(isset($_GET["articel_id"]))){
+        $tplData = [];
+        $tplData['title'] = $pageTitle;
+        $tplData = $this->session->addCredentialsToTmpData($tplData);
+
+
+        if(!isset($_GET["articel_id"]) || !$_GET["articel_id"]){
             header("Location: index.php");
             exit;
         }
 
-        $user_id = $_GET["user_id"];
         $articel_id = $_GET["articel_id"];
 
+        $tplData['reviewers'] = $this->db->getReviewersOfArticel($articel_id);
 
-        $res = $this->db->setArticelToReviewer($user_id, $articel_id);
-        header('Content-type: application/json');
-        echo json_encode($res);
-        exit;
-
+        return $tplData;
     }
 
 }

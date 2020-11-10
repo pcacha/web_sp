@@ -25,6 +25,8 @@ class ReviewArticelController implements IController {
 
         $articel_id = $_GET["articel_id"];
 
+        $tplData["articel_name"] = $this->db->getArticelById($articel_id);
+
         $review_data = $this->db->canReviewArticel($articel_id, $this->session->readSession("id"));
         if($review_data === null){
             header("Location: index.php");

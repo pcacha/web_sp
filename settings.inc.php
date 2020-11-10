@@ -1,15 +1,15 @@
 <?php
-/*
+
 define("DB_SERVER","localhost");
 define("DB_NAME","cacha_konference");
 define("DB_USER","root");
 define("DB_PASS","");
-*/
+/*
 define("DB_SERVER","localhost");
 define("DB_NAME","kivweb1604867199");
 define("DB_USER","kivweb1604867199");
 define("DB_PASS","N3G3GxTk");
-
+*/
 const DEFAULT_WEB_PAGE_KEY = "uvod";
 
 define("ADMIN","admin");
@@ -135,6 +135,20 @@ const WEB_PAGES = array(
         "view_class_name" => \kivweb\Views\TemplateBasics::class,
         "template_type" => \kivweb\Views\TemplateBasics::PAGE_DECIDE,
         "access" => [ADMIN],
-    )
+    ),
+    "prehledRecenzentu" => array(
+        "title" => "Recenzenti článku",
+        "controller_class_name" => \kivweb\Controllers\ReviewersListController::class,
+        "view_class_name" => \kivweb\Views\TemplateBasics::class,
+        "template_type" => \kivweb\Views\TemplateBasics::PAGE_REVIEWERS,
+        "access" => [ADMIN],
+    ),
+    "mojeUdaje" => array(
+        "title" => "Moje údaje",
+        "controller_class_name" => \kivweb\Controllers\MyDataController::class,
+        "view_class_name" => \kivweb\Views\TemplateBasics::class,
+        "template_type" => \kivweb\Views\TemplateBasics::PAGE_MY_DATA,
+        "access" => [AUTHOR, REVIEWER, ADMIN],
+    ),
 );
 ?>

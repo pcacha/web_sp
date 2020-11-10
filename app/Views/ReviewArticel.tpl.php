@@ -5,15 +5,19 @@ global $tplData;
 <section>
     <div class="mx-auto mt-5 border rounded p-md-5 p-2 container create-articel">
 
+        <h2 class="mb-5">Recenzovat Článek</h2>
+
         <?php if(isset($tplData["message"])): ?>
             <div class="alert <?php echo($tplData["res"] ? "alert-success" : "alert-danger"); ?>" role="alert">
                 <?= $tplData["message"] ?>
             </div>
         <?php endif; ?>
 
+        <h3 class="mb-3"><?= $tplData["articel_name"] ?></h3>
+
         <form method="post">
             <div class="form-group">
-                <label for="stars" id="starsLabel" class="font-weight-bold">Počet hvězd:</label>
+                <label for="stars" id="starsLabel" class="font-weight-bold">Počet hvězd: </label>
                 <select class="form-control" id="stars" name="stars" required>
                     <?php for($i = 1; $i < 6; $i++) { ?>
                         <option value="<?= $i ?>" <?php if(isset($tplData["rev_star_count"])) if ($i == $tplData["rev_star_count"]) echo("selected") ?>><?= $i ?></option>
@@ -23,7 +27,7 @@ global $tplData;
                     function setStars(count) {
                         let stars = "";
                         for(let i = 0; i < count; i++){
-                            stars += '<span class="fa fa-star text-warning"></span>';
+                            stars += '<span class="fa fa-star text-warning" style="text-shadow: 2px 2px 4px #000000;"></span>';
                         }
                         $('#starsLabel').html("Počet hvězed:   " + stars);
                     }

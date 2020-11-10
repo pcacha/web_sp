@@ -5,6 +5,8 @@ global $tplData;
 <section>
     <div class="mx-auto mt-5 border rounded create-articel container p-md-5 p-2">
 
+        <h2 class="mb-5">Moje Články</h2>
+
         <div class="row mb-5">
             <div class="col-12 col-md text-info font-weight-bold">
                 <h4 class="text-center">
@@ -29,6 +31,10 @@ global $tplData;
             </div>
         </div>
 
+        <?php if(!isset($tplData["articles"]) || !$tplData["articles"]): ?>
+            <h3>Nejsou zde žádné články</h3>
+        <?php endif;?>
+
         <?php foreach ($tplData["articles"] as $key => $item): ?>
             <?php
                 $stateColor = "border-info";
@@ -43,7 +49,6 @@ global $tplData;
                 <div class="card-body border <?= $stateColor ?> rounded" style="border-width: thick!important;">
                     <div class="row">
                         <div class="col-12 col-md-3">
-                            <h4 class="card-title font-italic"><?= $item["name"] ?></h4>
                             <a class="btn btn-success" target="_blank" href="<?= "uploads/".$item['document_name'] ?>"><i class="fa fa-floppy-o"></i> Stáhnout Článek</a>
                             <?php if($item["state"] === REVIEWED): ?>
                                 <a class="btn btn-secondary text-white my-2" href="../../index.php?page=publikovat&id=<?= $item["id"] ?>"><i class="fa fa-pencil-square"></i> Upravit Článek</a>
@@ -51,12 +56,13 @@ global $tplData;
                             <p class="card-text text-info"> <br> <?= date("d.m. Y", strtotime( $item["creation_date"]))?></p>
                         </div>
                         <div class="col-12 col-md-9">
-
-                            <h5 class="mb-0">
+                            <h4 class="card-title font-italic mt-3 mt-md-0">
                                 <a data-toggle="collapse" href="#a<?= $key ?>">
-                                    Abstrakt...
+                                    <i class="fa fa-sort text-secondary" aria-hidden="true"></i>
+                                    <?= $item["name"] ?>
                                 </a>
-                            </h5>
+                            </h4>
+
                             <div id="a<?= $key ?>" class="collapse">
                                 <?= $item["abstract"] ?>
                             </div>

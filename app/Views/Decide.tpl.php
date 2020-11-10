@@ -5,11 +5,15 @@ global $tplData;
 <section>
     <div class="mx-auto mt-5 border rounded p-md-5 p-2 container create-articel">
 
+        <h2 class="mb-5">Publikovat/Odmítnout Článek</h2>
+
         <?php if(isset($tplData["message"])): ?>
             <div class="alert <?php echo($tplData["res"] ? "alert-success" : "alert-danger"); ?>" role="alert">
                 <?= $tplData["message"] ?>
             </div>
         <?php endif; ?>
+
+        <h3 class="mb-3"><?= $tplData["articel_name"] ?></h3>
 
         <form method="post">
             <p class="font-weight-bold">Publikovat:</p>
