@@ -284,7 +284,7 @@ from cacha_users as u where 'admin' not in
 
     public function getRevCount($articel_id)
     {
-        $query = "select count(*) as count from cacha_reviews as r where r.article_id = ?";
+        $query = "select count(*) as count from cacha_reviews as r where r.article_id = ? and r.evaluation is not null";
         $params = [$articel_id];
         $res = $this->queryOne($query, $params);
         return $res["count"];

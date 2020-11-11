@@ -55,14 +55,14 @@ class CreateArticelController implements IController
                     return $tplData;
                 }
 
-                $finfo = finfo_open(FILEINFO_MIME_TYPE);
-                $mime = finfo_file($finfo, $_FILES['articel']['tmp_name']);
-                if ($mime !== 'application/pdf') {
-                    $tplData["message"] = "Vkládejte pouze pdf dokumenty";
-                    return $tplData;
-                }
 
                 if(!isset($_POST["id"])){
+                    $finfo = finfo_open(FILEINFO_MIME_TYPE);
+                    $mime = finfo_file($finfo, $_FILES['articel']['tmp_name']);
+                    if ($mime !== 'application/pdf') {
+                        $tplData["message"] = "Vkládejte pouze pdf dokumenty";
+                        return $tplData;
+                    }
                     $document_name = time()."_".$_FILES["articel"]["name"];
                     $added = $this->db->addArticel($name, $abstract, $document_name);
                     move_uploaded_file($_FILES["articel"]["tmp_name"], "uploads/$document_name");
@@ -78,6 +78,12 @@ class CreateArticelController implements IController
                     $id = $_POST["id"];
                     $document_name = $articel["document_name"];
                     if($_FILES["articel"]["name"]){
+                        $finfo = finfo_open(FILEINFO_MIME_TYPE);
+                        $mime = finfo_file($finfo, $_FILES['articel']['tmp_name']);
+                        if ($mime !== 'application/pdf') {
+                            $tplData["message"] = "Vkládejte pouze pdf dokumenty";
+                            return $tplData;
+                        }
                         $document_name = time()."_".$_FILES["articel"]["name"];
                         move_uploaded_file($_FILES["articel"]["tmp_name"], "uploads/$document_name");
                     }
